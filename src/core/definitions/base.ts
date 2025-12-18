@@ -5,26 +5,26 @@ import type {
 } from "../types";
 
 /**
- * Config generic valabil pentru orice stream (ndjson, sse, websocket)
+ * Generic config applicable for any stream (ndjson, sse, websocket)
  */
 export interface StreamBaseConfig<TRequest, TRaw, TResponse> {
     mode: StreamMode;
 
     endpoint: string;
 
-    // opțiuni generice de rețea
+    // Generic network options
     transportOptions?: {
         headers?: Record<string, string>;
         query?: Record<string, string | number | boolean | null | undefined>;
         timeoutMs?: number;
     };
 
-    // transformă request-ul userului într-o formă digerabilă de transport
+    // Transforms the user's request into a transport-friendly shape
     requestMapper?: RequestMapper<TRequest>;
 
-    // transformă valorile brute în obiectul final
+    // Transforms raw values into the final object
     responseHydrator: ResponseHydrator<TRaw, TResponse>;
 
-    // opțional: metadata pentru logging / debug / audit
+    // Optional metadata for logging / debug / audit
     meta?: Record<string, unknown>;
 }

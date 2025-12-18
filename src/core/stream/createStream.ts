@@ -48,7 +48,7 @@ export function createStream<TRequest, TRaw, TResponse>(
 
     function start(request?: TRequest): void {
         if (active) {
-            // nu facem restart implicit, utilizatorul știe să dea stop/start dacă vrea
+            // Do not restart implicitly; the user can stop/start if they want
             return;
         }
 
@@ -68,7 +68,7 @@ export function createStream<TRequest, TRaw, TResponse>(
                     onRaw(raw: TRaw): void {
                         try {
                             const hydrated = definition.responseHydrator(raw);
-                            // dacă hydration-ul reușește, suntem clar în streaming
+                            // If hydration succeeds, we are clearly streaming
                             if (status === "connecting") {
                                 notifyStatus("streaming");
                             }
@@ -92,12 +92,12 @@ export function createStream<TRequest, TRaw, TResponse>(
                 },
                 {
                     payload,
-                    // momentan nu expunem AbortSignal extern; transport-urile își gestionează singure abort-ul
+                    // Currently we do not expose AbortSignal externally; transports handle abort themselves
                     signal: null,
                 }
             );
 
-            // dacă nu a apucat încă să vină nimic, dar connect-ul a mers, considerăm că suntem „streaming”
+            // If nothing has arrived yet but connect worked, consider the state streaming
             if (status === "connecting") {
                 notifyStatus("streaming");
             }
@@ -127,8 +127,8 @@ export function createStream<TRequest, TRaw, TResponse>(
             try {
                 transport.disconnect();
             } catch (e) {
-                // dacă și la disconnect crapă ceva, îl tratăm ca internal error,
-                // dar nu mai facem altceva cu stream-ul
+                // If disconnect also fails, treat it as an internal error,
+                // but do not do anything else with the stream
                 const error = new RTSKError({
                     kind: "internal",
                     message: "Error while disconnecting transport",
