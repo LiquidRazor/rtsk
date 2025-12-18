@@ -4,13 +4,23 @@ import type {
     TransportHandlers,
 } from "../types";
 
+/**
+ * Runtime configuration for the WebSocket transport.
+ *
+ * @public
+ */
 export type WebsocketTransportConfig = {
+    /** Endpoint that accepts WebSocket connections. */
     endpoint: string;
+    /** Query string parameters appended to the endpoint URL. */
     query?: Record<string, string | number | boolean | null | undefined>;
+    /** WebSocket subprotocols to advertise during the handshake. */
     protocols?: string[];
+    /** Enables automatic reconnection after unexpected closure. */
     autoReconnect?: boolean;
+    /** Delay between reconnection attempts when {@link autoReconnect} is true. */
     reconnectDelayMs?: number;
-}
+};
 
 function buildUrl(endpoint: string, query?: WebsocketTransportConfig["query"]): string {
     if (!query || Object.keys(query).length === 0) {

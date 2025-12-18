@@ -5,12 +5,24 @@ import type {
     TransportConnectOptions,
 } from "../types";
 
-export type  NdjsonTransportConfig = {
+/**
+ * Runtime configuration for the NDJSON transport.
+ *
+ * @public
+ */
+export type NdjsonTransportConfig = {
+    /** Endpoint that exposes an NDJSON stream. */
     endpoint: string;
+    /** HTTP headers sent with the request when applicable. */
     headers?: Record<string, string>;
+    /** Query string parameters appended to the endpoint URL. */
     query?: Record<string, string | number | boolean | null | undefined>;
+    /**
+     * Optional client-side timeout used to abort the request if no response is
+     * received within the allotted milliseconds.
+     */
     timeoutMs?: number;
-}
+};
 
 function buildUrl(endpoint: string, query?: NdjsonTransportConfig["query"]): string {
     if (!query || Object.keys(query).length === 0) {

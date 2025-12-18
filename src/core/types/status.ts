@@ -1,3 +1,8 @@
+/**
+ * Lifecycle statuses reported by stream controllers.
+ *
+ * @public
+ */
 export type RTSKStatus =
   | "idle"
   | "connecting"

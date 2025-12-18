@@ -1,5 +1,18 @@
-// Transforms TRequest (DTO, class, etc.) into something the transport can handle
+/**
+ * Maps a consumer-facing request into a transport-compatible payload.
+ *
+ * @typeParam TRequest - Request payload accepted by the stream API.
+ *
+ * @public
+ */
 export type RequestMapper<TRequest> = (request: TRequest) => unknown;
 
-// Transforms the raw value read from the stream into the final object needed by the UI/domain
+/**
+ * Hydrates a raw transport payload into the consumer-facing response type.
+ *
+ * @typeParam TRaw - Raw payload type emitted by the transport.
+ * @typeParam TResponse - Hydrated payload type delivered to subscribers.
+ *
+ * @public
+ */
 export type ResponseHydrator<TRaw, TResponse> = (raw: TRaw) => TResponse;
