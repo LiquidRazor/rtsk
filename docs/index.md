@@ -140,7 +140,7 @@ for lower-level control.
 - `StreamDefinition`
 - `RTSKError`
 
-For full API details, see the generated reference documentation in [API docs](docs/api/).
+For full API details, see the generated reference documentation in [API docs](/docs/api/).
 
 ---
 
