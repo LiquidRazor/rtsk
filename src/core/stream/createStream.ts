@@ -1,7 +1,7 @@
 import type {RTSKStatus, StreamController, StreamEventHandlers, StreamSubscription, Transport,} from "../types";
 import {RTSKError} from "../types";
 import type {StreamDefinition} from "../definitions";
-import {createTransportForDefinition} from "../transport";
+import {createTransportForDefinition} from "../transport/factory";
 
 export function createStream<TRequest, TRaw, TResponse>(
     definition: StreamDefinition<TRequest, TRaw, TResponse>
