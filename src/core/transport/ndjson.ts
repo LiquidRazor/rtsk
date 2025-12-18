@@ -5,7 +5,7 @@ import type {
     TransportConnectOptions,
 } from "../types";
 
-interface NdjsonTransportConfig {
+export type  NdjsonTransportConfig = {
     endpoint: string;
     headers?: Record<string, string>;
     query?: Record<string, string | number | boolean | null | undefined>;
@@ -27,6 +27,20 @@ function buildUrl(endpoint: string, query?: NdjsonTransportConfig["query"]): str
 
     return url.toString();
 }
+
+/**
+ * Low-level NDJSON transport implementation.
+ *
+ * @remarks
+ * This is an advanced API.
+ * Most consumers should prefer {@link createStream}, which provides
+ * a higher-level, protocol-agnostic interface with lifecycle management.
+ *
+ * This transport is exposed for advanced use cases such as custom
+ * wiring, testing, or direct transport control.
+ *
+ * @public
+ */
 
 export class NdjsonTransport<TRaw = unknown> implements Transport<TRaw> {
     private readonly config: NdjsonTransportConfig;
