@@ -5,7 +5,7 @@ interface SseTransportConfig {
     endpoint: string;
     query?: Record<string, string | number | boolean | null | undefined>;
     withCredentials?: boolean;
-    retryIntervalMs?: number; // doar informativ aici, EventSource are propriul retry
+    retryIntervalMs?: number; // Informational only; EventSource handles its own retry
 }
 
 function buildUrl(endpoint: string, query?: SseTransportConfig["query"]): string {
@@ -65,7 +65,7 @@ export class SseTransport<TRaw = unknown> implements Transport<TRaw> {
         };
 
         source.onerror = (event: Event) => {
-            // EventSource nu oferă multe detalii...
+            // EventSource does not provide many details...
             handlers.onError(
                 new RTSKError({
                     kind: "transport",
@@ -75,7 +75,7 @@ export class SseTransport<TRaw = unknown> implements Transport<TRaw> {
             );
         };
 
-        // Nu avem onopen aici, statusurile le va gestiona controller-ul mai sus
+        // There is no onopen here; statuses are managed by the controller above
     }
 
     disconnect(): void {

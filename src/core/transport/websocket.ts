@@ -69,7 +69,7 @@ export class WebsocketTransport<TRaw = unknown> implements Transport<TRaw> {
                 if (typeof event.data === "string") {
                     raw = JSON.parse(event.data) as TRaw;
                 } else {
-                    // pentru început, nu facem nimic fancy cu binary
+                    // For now, we do not do anything fancy with binary
                     raw = event.data as unknown as TRaw;
                 }
                 this.handlers.onRaw(raw);
@@ -110,7 +110,7 @@ export class WebsocketTransport<TRaw = unknown> implements Transport<TRaw> {
             if (!this.manualClose && this.config.autoReconnect) {
                 const delay = this.config.reconnectDelayMs ?? 1000;
                 window.setTimeout(() => {
-                    // dacă între timp s-a chemat disconnect, nu mai reconectăm
+                    // If disconnect was called in the meantime, do not reconnect
                     if (!this.manualClose && this.handlers) {
                         this.openSocket();
                     }
