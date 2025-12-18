@@ -1,0 +1,93 @@
+import { RTSKError } from "../types";
+import type { Transport, TransportHandlers } from "../types";
+
+interface SseTransportConfig {
+    endpoint: string;
+    query?: Record<string, string | number | boolean | null | undefined>;
+    withCredentials?: boolean;
+    retryIntervalMs?: number; // doar informativ aici, EventSource are propriul retry
+}
+
+function buildUrl(endpoint: string, query?: SseTransportConfig["query"]): string {
+    if (!query || Object.keys(query).length === 0) {
+        return endpoint;
+    }
+
+    const url = new URL(endpoint, window.location.origin);
+    Object.entries(query).forEach(([key, value]) => {
+        if (value === undefined || value === null) {
+            return;
+        }
+        url.searchParams.set(key, String(value));
+    });
+
+    return url.toString();
+}
+
+export class SseTransport<TRaw = unknown> implements Transport<TRaw> {
+    private readonly config: SseTransportConfig;
+    private source: EventSource | null = null;
+    private active = false;
+
+    constructor(config: SseTransportConfig) {
+        this.config = config;
+    }
+
+    connect(handlers: TransportHandlers<TRaw>): void {
+        if (this.active) {
+            return;
+        }
+
+        this.active = true;
+
+        const url = buildUrl(this.config.endpoint, this.config.query);
+
+        const source = new EventSource(url, {
+            withCredentials: Boolean(this.config.withCredentials),
+        });
+
+        this.source = source;
+
+        source.onmessage = (ev: MessageEvent) => {
+            try {
+                const raw = JSON.parse(ev.data) as TRaw;
+                handlers.onRaw(raw);
+            } catch (e) {
+                handlers.onError(
+                    new RTSKError({
+                        kind: "protocol",
+                        message: "Invalid SSE message payload",
+                        cause: e,
+                    })
+                );
+            }
+            return;
+        };
+
+        source.onerror = (event: Event) => {
+            // EventSource nu oferă multe detalii...
+            handlers.onError(
+                new RTSKError({
+                    kind: "transport",
+                    message: "SSE connection error",
+                    cause: event,
+                })
+            );
+        };
+
+        // Nu avem onopen aici, statusurile le va gestiona controller-ul mai sus
+    }
+
+    disconnect(): void {
+        if (!this.active) {
+            return;
+        }
+
+        this.active = false;
+
+        if (this.source) {
+            this.source.close();
+            this.source = null;
+        }
+    }
+}
