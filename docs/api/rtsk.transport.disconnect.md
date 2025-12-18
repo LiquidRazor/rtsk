@@ -4,6 +4,8 @@
 
 ## Transport.disconnect() method
 
+Terminates the transport connection and releases underlying resources.
+
 **Signature:**
 
 ```typescript

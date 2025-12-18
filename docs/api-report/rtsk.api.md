@@ -9,7 +9,6 @@ export function createStream<TRequest, TRaw, TResponse>(definition: StreamDefini
 
 // @public
 export interface NdjsonStreamDefinition<TRequest, TRaw, TResponse> extends StreamBaseConfig<TRequest, TRaw, TResponse> {
-    // (undocumented)
     mode: "ndjson";
 }
 
@@ -22,7 +21,7 @@ export class NdjsonTransport<TRaw = unknown> implements Transport<TRaw> {
     disconnect(): void;
 }
 
-// @public (undocumented)
+// @public
 export type NdjsonTransportConfig = {
     endpoint: string;
     headers?: Record<string, string>;
@@ -30,54 +29,43 @@ export type NdjsonTransportConfig = {
     timeoutMs?: number;
 };
 
-// @public (undocumented)
+// @public
 export type RequestMapper<TRequest> = (request: TRequest) => unknown;
 
-// @public (undocumented)
+// @public
 export type ResponseHydrator<TRaw, TResponse> = (raw: TRaw) => TResponse;
 
-// @public (undocumented)
+// @public
 export class RTSKError extends Error {
     constructor(details: RTSKErrorDetails);
-    // (undocumented)
     readonly cause?: unknown;
-    // (undocumented)
     readonly kind: RTSKErrorKind;
-    // (undocumented)
     readonly statusBefore?: RTSKStatus;
 }
 
-// @public (undocumented)
+// @public
 export interface RTSKErrorDetails {
-    // (undocumented)
     cause?: unknown;
-    // (undocumented)
     kind: RTSKErrorKind;
-    // (undocumented)
     message: string;
-    // (undocumented)
     statusBefore?: RTSKStatus;
 }
 
-// @public (undocumented)
+// @public
 export type RTSKErrorKind = "transport" | "hydrate" | "protocol" | "internal";
 
-// @public (undocumented)
+// @public
 export type RTSKStatus = "idle" | "connecting" | "streaming" | "completed" | "error" | "stopped";
 
-// @public (undocumented)
+// @public
 export interface SseExtraConfig {
-    // (undocumented)
     retryIntervalMs?: number;
-    // (undocumented)
     withCredentials?: boolean;
 }
 
-// @public (undocumented)
+// @public
 export interface SseStreamDefinition<TRequest, TRaw, TResponse> extends StreamBaseConfig<TRequest, TRaw, TResponse> {
-    // (undocumented)
     mode: "sse";
-    // (undocumented)
     sseOptions?: SseExtraConfig;
 }
 
@@ -90,7 +78,7 @@ export class SseTransport<TRaw = unknown> implements Transport<TRaw> {
     disconnect(): void;
 }
 
-// @public (undocumented)
+// @public
 export type SseTransportConfig = {
     endpoint: string;
     query?: Record<string, string | number | boolean | null | undefined>;
@@ -100,17 +88,11 @@ export type SseTransportConfig = {
 
 // @public
 export interface StreamBaseConfig<TRequest, TRaw, TResponse> {
-    // (undocumented)
     endpoint: string;
-    // (undocumented)
     meta?: Record<string, unknown>;
-    // (undocumented)
     mode: StreamMode;
-    // (undocumented)
     requestMapper?: RequestMapper<TRequest>;
-    // (undocumented)
     responseHydrator: ResponseHydrator<TRaw, TResponse>;
-    // (undocumented)
     transportOptions?: {
         headers?: Record<string, string>;
         query?: Record<string, string | number | boolean | null | undefined>;
@@ -127,7 +109,7 @@ export interface StreamController<TRequest = unknown, TResponse = unknown> {
     subscribe(handlers: StreamEventHandlers<TResponse>): StreamSubscription;
 }
 
-// @public (undocumented)
+// @public
 export type StreamDefinition<TRequest, TRaw, TResponse> = NdjsonStreamDefinition<TRequest, TRaw, TResponse> | SseStreamDefinition<TRequest, TRaw, TResponse> | WebsocketStreamDefinition<TRequest, TRaw, TResponse>;
 
 // @public
@@ -138,7 +120,7 @@ export interface StreamEventHandlers<TResponse> {
     onStatusChange?(status: RTSKStatus): void;
 }
 
-// @public (undocumented)
+// @public
 export type StreamMode = "ndjson" | "sse" | "websocket";
 
 // @public
@@ -146,49 +128,36 @@ export interface StreamSubscription {
     unsubscribe(): void;
 }
 
-// @public (undocumented)
+// @public
 export interface Transport<TRaw = unknown> {
-    // (undocumented)
     connect(handlers: TransportHandlers<TRaw>, options?: TransportConnectOptions): void;
-    // (undocumented)
     disconnect(): void;
-    // (undocumented)
     send?(data: unknown): void;
 }
 
-// @public (undocumented)
+// @public
 export interface TransportConnectOptions {
-    // (undocumented)
     payload?: unknown;
-    // (undocumented)
     signal?: AbortSignal | null;
 }
 
-// @public (undocumented)
+// @public
 export interface TransportHandlers<TRaw> {
-    // (undocumented)
     onComplete(): void;
-    // (undocumented)
     onError(error: RTSKError): void;
-    // (undocumented)
     onRaw(raw: TRaw): void;
 }
 
-// @public (undocumented)
+// @public
 export interface WebsocketExtraConfig {
-    // (undocumented)
     autoReconnect?: boolean;
-    // (undocumented)
     protocols?: string[];
-    // (undocumented)
     reconnectDelayMs?: number;
 }
 
-// @public (undocumented)
+// @public
 export interface WebsocketStreamDefinition<TRequest, TRaw, TResponse> extends StreamBaseConfig<TRequest, TRaw, TResponse> {
-    // (undocumented)
     mode: "websocket";
-    // (undocumented)
     wsOptions?: WebsocketExtraConfig;
 }
 
@@ -203,7 +172,7 @@ export class WebsocketTransport<TRaw = unknown> implements Transport<TRaw> {
     send(data: unknown): void;
 }
 
-// @public (undocumented)
+// @public
 export type WebsocketTransportConfig = {
     endpoint: string;
     query?: Record<string, string | number | boolean | null | undefined>;
@@ -211,7 +180,5 @@ export type WebsocketTransportConfig = {
     autoReconnect?: boolean;
     reconnectDelayMs?: number;
 };
-
-// (No @packageDocumentation comment for this package)
 
 ```

@@ -4,6 +4,8 @@
 
 ## WebsocketStreamDefinition.wsOptions property
 
+WebSocket-specific options forwarded to the transport.
+
 **Signature:**
 
 ```typescript

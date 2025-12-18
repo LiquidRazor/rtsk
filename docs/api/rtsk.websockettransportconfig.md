@@ -4,6 +4,8 @@
 
 ## WebsocketTransportConfig type
 
+Runtime configuration for the WebSocket transport.
+
 **Signature:**
 
 ```typescript

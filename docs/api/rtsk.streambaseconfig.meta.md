@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.meta property
 
+Free-form metadata for logging, debugging, or auditing purposes.
+
 **Signature:**
 
 ```typescript

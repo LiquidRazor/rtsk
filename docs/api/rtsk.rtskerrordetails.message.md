@@ -4,6 +4,8 @@
 
 ## RTSKErrorDetails.message property
 
+Human-readable description of what went wrong.
+
 **Signature:**
 
 ```typescript

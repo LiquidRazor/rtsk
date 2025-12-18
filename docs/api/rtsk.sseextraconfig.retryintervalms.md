@@ -4,6 +4,8 @@
 
 ## SseExtraConfig.retryIntervalMs property
 
+Optional override for the server-provided reconnection delay.
+
 **Signature:**
 
 ```typescript

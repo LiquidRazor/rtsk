@@ -4,6 +4,8 @@
 
 ## StreamMode type
 
+Supported streaming transport modes.
+
 **Signature:**
 
 ```typescript

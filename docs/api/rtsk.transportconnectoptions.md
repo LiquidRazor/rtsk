@@ -4,6 +4,8 @@
 
 ## TransportConnectOptions interface
 
+Options provided to a transport when initiating a connection.
+
 **Signature:**
 
 ```typescript
@@ -48,7 +50,7 @@ unknown
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional payload sent during connection setup (e.g., POST body).
 
 
 </td></tr>
@@ -67,7 +69,7 @@ AbortSignal \| null
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ External abort signal for transports that support cooperative cancellation.
 
 
 </td></tr>

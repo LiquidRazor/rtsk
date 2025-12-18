@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.responseHydrator property
 
+Hydrates raw transport values into the final response type.
+
 **Signature:**
 
 ```typescript

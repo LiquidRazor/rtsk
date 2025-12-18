@@ -4,6 +4,8 @@
 
 ## WebsocketExtraConfig interface
 
+Additional WebSocket configuration for stream definitions.
+
 **Signature:**
 
 ```typescript
@@ -48,7 +50,7 @@ boolean
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Enables automatic reconnection when the socket closes unexpectedly.
 
 
 </td></tr>
@@ -67,7 +69,7 @@ string\[\]
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional subprotocols advertised during the WebSocket handshake.
 
 
 </td></tr>
@@ -86,7 +88,7 @@ number
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Delay between reconnection attempts when  is true.
 
 
 </td></tr>

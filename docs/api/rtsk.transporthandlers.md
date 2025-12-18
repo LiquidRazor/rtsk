@@ -4,6 +4,8 @@
 
 ## TransportHandlers interface
 
+Handlers invoked by transport implementations as the stream progresses.
+
 **Signature:**
 
 ```typescript
@@ -30,6 +32,8 @@ Description
 
 </td><td>
 
+Called when the transport finishes cleanly.
+
 
 </td></tr>
 <tr><td>
@@ -39,6 +43,8 @@ Description
 
 </td><td>
 
+Called when a transport-level or protocol-level error occurs.
+
 
 </td></tr>
 <tr><td>
@@ -47,6 +53,8 @@ Description
 
 
 </td><td>
+
+Called whenever the transport receives a raw payload.
 
 
 </td></tr>

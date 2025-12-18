@@ -2,6 +2,18 @@ import { NdjsonTransport } from "./ndjson";
 import { SseTransport } from "./sse";
 import { WebsocketTransport } from "./websocket";
 import { RTSKError } from "../types";
+/**
+ * Creates a concrete transport instance that matches the provided stream definition.
+ *
+ * @remarks
+ * This is a low-level helper used by {@link createStream} to instantiate the
+ * appropriate transport for the selected protocol.
+ *
+ * @typeParam TRaw - Raw payload type emitted by the transport.
+ * @param definition - Stream definition that determines which transport to build.
+ *
+ * @public
+ */
 export function createTransportForDefinition(definition) {
     const { endpoint, transportOptions } = definition;
     switch (definition.mode) {

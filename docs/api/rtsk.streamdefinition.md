@@ -4,6 +4,8 @@
 
 ## StreamDefinition type
 
+Union of all supported stream definition variants.
+
 **Signature:**
 
 ```typescript

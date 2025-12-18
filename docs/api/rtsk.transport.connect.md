@@ -4,6 +4,8 @@
 
 ## Transport.connect() method
 
+Initiates the transport connection and begins streaming data.
+
 **Signature:**
 
 ```typescript
@@ -40,6 +42,8 @@ handlers
 
 </td><td>
 
+Callback hooks invoked for raw payloads, errors, and completion.
+
 
 </td></tr>
 <tr><td>
@@ -54,7 +58,7 @@ options
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional connection parameters such as payload and abort signal.
 
 
 </td></tr>

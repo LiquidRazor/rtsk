@@ -4,6 +4,8 @@
 
 ## WebsocketStreamDefinition.mode property
 
+Identifies the stream as WebSocket-based.
+
 **Signature:**
 
 ```typescript

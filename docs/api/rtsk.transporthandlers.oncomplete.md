@@ -4,6 +4,8 @@
 
 ## TransportHandlers.onComplete() method
 
+Called when the transport finishes cleanly.
+
 **Signature:**
 
 ```typescript

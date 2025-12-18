@@ -4,6 +4,8 @@
 
 ## SseStreamDefinition.sseOptions property
 
+EventSource-specific options forwarded to the transport.
+
 **Signature:**
 
 ```typescript

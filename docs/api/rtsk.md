@@ -4,6 +4,8 @@
 
 ## rtsk package
 
+Entry point for the RTSK streaming toolkit. Re-exports the public type definitions, stream definitions, transport implementations, and high-level stream controller utilities.
+
 ## Classes
 
 <table><thead><tr><th>
@@ -34,6 +36,8 @@ Low-level NDJSON transport implementation.
 
 
 </td><td>
+
+Custom error class used throughout the RTSK streaming toolkit.
 
 
 </td></tr>
@@ -107,7 +111,7 @@ Description
 
 </td><td>
 
-For NDJSON, TRaw is usually an object, but we keep it generic.
+Definition for a newline-delimited JSON (NDJSON) stream.
 
 
 </td></tr>
@@ -118,6 +122,8 @@ For NDJSON, TRaw is usually an object, but we keep it generic.
 
 </td><td>
 
+Structured data used to construct [RTSKError](./rtsk.rtskerror.md) instances.
+
 
 </td></tr>
 <tr><td>
@@ -126,6 +132,8 @@ For NDJSON, TRaw is usually an object, but we keep it generic.
 
 
 </td><td>
+
+Additional EventSource configuration for SSE streams.
 
 
 </td></tr>
@@ -136,6 +144,8 @@ For NDJSON, TRaw is usually an object, but we keep it generic.
 
 </td><td>
 
+Definition for a Server-Sent Events (SSE) stream.
+
 
 </td></tr>
 <tr><td>
@@ -145,7 +155,7 @@ For NDJSON, TRaw is usually an object, but we keep it generic.
 
 </td><td>
 
-Generic config applicable for any stream (ndjson, sse, websocket)
+Common configuration shared by all stream definition variants.
 
 
 </td></tr>
@@ -189,6 +199,8 @@ A handle returned by [StreamController.subscribe()](./rtsk.streamcontroller.subs
 
 </td><td>
 
+Contract implemented by low-level transport drivers.
+
 
 </td></tr>
 <tr><td>
@@ -197,6 +209,8 @@ A handle returned by [StreamController.subscribe()](./rtsk.streamcontroller.subs
 
 
 </td><td>
+
+Options provided to a transport when initiating a connection.
 
 
 </td></tr>
@@ -207,6 +221,8 @@ A handle returned by [StreamController.subscribe()](./rtsk.streamcontroller.subs
 
 </td><td>
 
+Handlers invoked by transport implementations as the stream progresses.
+
 
 </td></tr>
 <tr><td>
@@ -216,6 +232,8 @@ A handle returned by [StreamController.subscribe()](./rtsk.streamcontroller.subs
 
 </td><td>
 
+Additional WebSocket configuration for stream definitions.
+
 
 </td></tr>
 <tr><td>
@@ -224,6 +242,8 @@ A handle returned by [StreamController.subscribe()](./rtsk.streamcontroller.subs
 
 
 </td><td>
+
+Definition for a WebSocket-based stream.
 
 
 </td></tr>
@@ -249,6 +269,8 @@ Description
 
 </td><td>
 
+Runtime configuration for the NDJSON transport.
+
 
 </td></tr>
 <tr><td>
@@ -257,6 +279,8 @@ Description
 
 
 </td><td>
+
+Maps a consumer-facing request into a transport-compatible payload.
 
 
 </td></tr>
@@ -267,6 +291,8 @@ Description
 
 </td><td>
 
+Hydrates a raw transport payload into the consumer-facing response type.
+
 
 </td></tr>
 <tr><td>
@@ -275,6 +301,8 @@ Description
 
 
 </td><td>
+
+Discriminated union of error categories surfaced by the SDK.
 
 
 </td></tr>
@@ -285,6 +313,8 @@ Description
 
 </td><td>
 
+Lifecycle statuses reported by stream controllers.
+
 
 </td></tr>
 <tr><td>
@@ -293,6 +323,8 @@ Description
 
 
 </td><td>
+
+Runtime configuration for the SSE transport.
 
 
 </td></tr>
@@ -303,6 +335,8 @@ Description
 
 </td><td>
 
+Union of all supported stream definition variants.
+
 
 </td></tr>
 <tr><td>
@@ -312,6 +346,8 @@ Description
 
 </td><td>
 
+Supported streaming transport modes.
+
 
 </td></tr>
 <tr><td>
@@ -320,6 +356,8 @@ Description
 
 
 </td><td>
+
+Runtime configuration for the WebSocket transport.
 
 
 </td></tr>

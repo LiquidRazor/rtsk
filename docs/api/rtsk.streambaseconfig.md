@@ -4,7 +4,7 @@
 
 ## StreamBaseConfig interface
 
-Generic config applicable for any stream (ndjson, sse, websocket)
+Common configuration shared by all stream definition variants.
 
 **Signature:**
 
@@ -50,6 +50,8 @@ string
 
 </td><td>
 
+Target endpoint (URL or path) used by the underlying transport.
+
 
 </td></tr>
 <tr><td>
@@ -67,7 +69,7 @@ Record&lt;string, unknown&gt;
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Free-form metadata for logging, debugging, or auditing purposes.
 
 
 </td></tr>
@@ -86,6 +88,8 @@ _(Optional)_
 
 </td><td>
 
+Streaming protocol used by the definition.
+
 
 </td></tr>
 <tr><td>
@@ -103,7 +107,7 @@ _(Optional)_
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Transforms the consumer-facing request into a transport-friendly payload.
 
 
 </td></tr>
@@ -122,6 +126,8 @@ _(Optional)_
 
 </td><td>
 
+Hydrates raw transport values into the final response type.
+
 
 </td></tr>
 <tr><td>
@@ -139,7 +145,7 @@ _(Optional)_
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional network settings applied by the transport implementation.
 
 
 </td></tr>

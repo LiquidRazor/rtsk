@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.requestMapper property
 
+Transforms the consumer-facing request into a transport-friendly payload.
+
 **Signature:**
 
 ```typescript

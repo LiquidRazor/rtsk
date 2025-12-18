@@ -4,6 +4,8 @@
 
 ## WebsocketStreamDefinition interface
 
+Definition for a WebSocket-based stream.
+
 **Signature:**
 
 ```typescript
@@ -49,6 +51,8 @@ Description
 
 </td><td>
 
+Identifies the stream as WebSocket-based.
+
 
 </td></tr>
 <tr><td>
@@ -66,7 +70,7 @@ Description
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ WebSocket-specific options forwarded to the transport.
 
 
 </td></tr>

@@ -1,8 +1,17 @@
 import type { Transport, TransportHandlers } from "../types";
+/**
+ * Runtime configuration for the SSE transport.
+ *
+ * @public
+ */
 export type SseTransportConfig = {
+    /** Endpoint that exposes an SSE-compatible stream. */
     endpoint: string;
+    /** Query string parameters appended to the endpoint URL. */
     query?: Record<string, string | number | boolean | null | undefined>;
+    /** Whether EventSource requests include credentials. */
     withCredentials?: boolean;
+    /** Informational retry delay; the browser ultimately controls SSE retries. */
     retryIntervalMs?: number;
 };
 /**

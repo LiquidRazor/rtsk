@@ -4,6 +4,8 @@
 
 ## RTSKErrorDetails.statusBefore property
 
+Controller status immediately prior to the error (when known).
+
 **Signature:**
 
 ```typescript

@@ -4,6 +4,8 @@
 
 ## RTSKErrorDetails interface
 
+Structured data used to construct [RTSKError](./rtsk.rtskerror.md) instances.
+
 **Signature:**
 
 ```typescript
@@ -48,7 +50,7 @@ unknown
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional underlying error or diagnostic payload.
 
 
 </td></tr>
@@ -67,6 +69,8 @@ _(Optional)_
 
 </td><td>
 
+Classification of the error.
+
 
 </td></tr>
 <tr><td>
@@ -83,6 +87,8 @@ string
 
 
 </td><td>
+
+Human-readable description of what went wrong.
 
 
 </td></tr>
@@ -101,7 +107,7 @@ string
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Controller status immediately prior to the error (when known).
 
 
 </td></tr>

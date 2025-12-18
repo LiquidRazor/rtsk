@@ -4,12 +4,18 @@
 
 ## RTSKError class
 
+Custom error class used throughout the RTSK streaming toolkit.
+
 **Signature:**
 
 ```typescript
 export declare class RTSKError extends Error 
 ```
 **Extends:** Error
+
+## Remarks
+
+Instances carry structured context such as error kind and the previous controller status, enabling downstream handling and telemetry.
 
 ## Constructors
 
@@ -85,7 +91,7 @@ unknown
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional underlying error or diagnostic payload.
 
 
 </td></tr>
@@ -106,6 +112,8 @@ _(Optional)_
 
 </td><td>
 
+Classification of the error.
+
 
 </td></tr>
 <tr><td>
@@ -125,7 +133,7 @@ _(Optional)_
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Controller status immediately prior to the error (when known).
 
 
 </td></tr>

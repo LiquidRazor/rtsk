@@ -24,6 +24,8 @@ Description
 
 </td><td>
 
+Entry point for the RTSK streaming toolkit. Re-exports the public type definitions, stream definitions, transport implementations, and high-level stream controller utilities.
+
 
 </td></tr>
 </tbody></table>

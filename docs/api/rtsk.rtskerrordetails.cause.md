@@ -4,6 +4,8 @@
 
 ## RTSKErrorDetails.cause property
 
+Optional underlying error or diagnostic payload.
+
 **Signature:**
 
 ```typescript

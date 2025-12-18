@@ -4,6 +4,8 @@
 
 ## TransportConnectOptions.payload property
 
+Optional payload sent during connection setup (e.g., POST body).
+
 **Signature:**
 
 ```typescript

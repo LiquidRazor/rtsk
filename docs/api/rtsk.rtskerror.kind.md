@@ -4,6 +4,8 @@
 
 ## RTSKError.kind property
 
+Classification of the error.
+
 **Signature:**
 
 ```typescript

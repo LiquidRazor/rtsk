@@ -4,6 +4,8 @@
 
 ## RTSKErrorKind type
 
+Discriminated union of error categories surfaced by the SDK.
+
 **Signature:**
 
 ```typescript

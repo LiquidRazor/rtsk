@@ -4,6 +4,8 @@
 
 ## TransportHandlers.onError() method
 
+Called when a transport-level or protocol-level error occurs.
+
 **Signature:**
 
 ```typescript

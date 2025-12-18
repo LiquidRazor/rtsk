@@ -4,6 +4,8 @@
 
 ## WebsocketExtraConfig.protocols property
 
+Optional subprotocols advertised during the WebSocket handshake.
+
 **Signature:**
 
 ```typescript

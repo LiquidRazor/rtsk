@@ -4,6 +4,8 @@
 
 ## SseTransportConfig type
 
+Runtime configuration for the SSE transport.
+
 **Signature:**
 
 ```typescript

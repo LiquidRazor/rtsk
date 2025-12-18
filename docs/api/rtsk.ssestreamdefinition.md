@@ -4,6 +4,8 @@
 
 ## SseStreamDefinition interface
 
+Definition for a Server-Sent Events (SSE) stream.
+
 **Signature:**
 
 ```typescript
@@ -49,6 +51,8 @@ Description
 
 </td><td>
 
+Identifies the stream as EventSource-based.
+
 
 </td></tr>
 <tr><td>
@@ -66,7 +70,7 @@ Description
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ EventSource-specific options forwarded to the transport.
 
 
 </td></tr>

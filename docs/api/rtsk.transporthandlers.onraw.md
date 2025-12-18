@@ -4,6 +4,8 @@
 
 ## TransportHandlers.onRaw() method
 
+Called whenever the transport receives a raw payload.
+
 **Signature:**
 
 ```typescript

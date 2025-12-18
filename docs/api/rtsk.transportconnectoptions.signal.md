@@ -4,6 +4,8 @@
 
 ## TransportConnectOptions.signal property
 
+External abort signal for transports that support cooperative cancellation.
+
 **Signature:**
 
 ```typescript

@@ -4,6 +4,8 @@
 
 ## WebsocketExtraConfig.autoReconnect property
 
+Enables automatic reconnection when the socket closes unexpectedly.
+
 **Signature:**
 
 ```typescript

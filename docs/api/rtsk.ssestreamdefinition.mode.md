@@ -4,6 +4,8 @@
 
 ## SseStreamDefinition.mode property
 
+Identifies the stream as EventSource-based.
+
 **Signature:**
 
 ```typescript

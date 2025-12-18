@@ -4,6 +4,8 @@
 
 ## NdjsonStreamDefinition.mode property
 
+Identifies the stream as NDJSON-based.
+
 **Signature:**
 
 ```typescript

@@ -4,6 +4,8 @@
 
 ## SseExtraConfig interface
 
+Additional EventSource configuration for SSE streams.
+
 **Signature:**
 
 ```typescript
@@ -48,7 +50,7 @@ number
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional override for the server-provided reconnection delay.
 
 
 </td></tr>
@@ -67,7 +69,7 @@ boolean
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Whether cookies and HTTP credentials are sent with the EventSource.
 
 
 </td></tr>

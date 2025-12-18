@@ -4,6 +4,8 @@
 
 ## WebsocketExtraConfig.reconnectDelayMs property
 
+Delay between reconnection attempts when  is true.
+
 **Signature:**
 
 ```typescript

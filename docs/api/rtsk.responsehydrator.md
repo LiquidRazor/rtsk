@@ -4,6 +4,8 @@
 
 ## ResponseHydrator type
 
+Hydrates a raw transport payload into the consumer-facing response type.
+
 **Signature:**
 
 ```typescript

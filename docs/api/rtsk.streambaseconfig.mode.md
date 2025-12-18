@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.mode property
 
+Streaming protocol used by the definition.
+
 **Signature:**
 
 ```typescript

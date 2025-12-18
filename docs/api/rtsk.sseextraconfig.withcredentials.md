@@ -4,6 +4,8 @@
 
 ## SseExtraConfig.withCredentials property
 
+Whether cookies and HTTP credentials are sent with the EventSource.
+
 **Signature:**
 
 ```typescript

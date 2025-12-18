@@ -4,6 +4,8 @@
 
 ## RTSKStatus type
 
+Lifecycle statuses reported by stream controllers.
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,7 @@
 
 ## NdjsonStreamDefinition interface
 
-For NDJSON, TRaw is usually an object, but we keep it generic.
+Definition for a newline-delimited JSON (NDJSON) stream.
 
 **Signature:**
 
@@ -12,6 +12,10 @@ For NDJSON, TRaw is usually an object, but we keep it generic.
 export interface NdjsonStreamDefinition<TRequest, TRaw, TResponse> extends StreamBaseConfig<TRequest, TRaw, TResponse> 
 ```
 **Extends:** [StreamBaseConfig](./rtsk.streambaseconfig.md)<!-- -->&lt;TRequest, TRaw, TResponse&gt;
+
+## Remarks
+
+The transport emits individual lines, each expected to be a valid JSON document. Hydration is performed via [StreamBaseConfig.responseHydrator](./rtsk.streambaseconfig.responsehydrator.md)<!-- -->.
 
 ## Properties
 
@@ -50,6 +54,8 @@ Description
 
 
 </td><td>
+
+Identifies the stream as NDJSON-based.
 
 
 </td></tr>

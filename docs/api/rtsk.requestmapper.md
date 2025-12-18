@@ -4,6 +4,8 @@
 
 ## RequestMapper type
 
+Maps a consumer-facing request into a transport-compatible payload.
+
 **Signature:**
 
 ```typescript

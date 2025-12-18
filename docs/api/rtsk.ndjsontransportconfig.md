@@ -4,6 +4,8 @@
 
 ## NdjsonTransportConfig type
 
+Runtime configuration for the NDJSON transport.
+
 **Signature:**
 
 ```typescript

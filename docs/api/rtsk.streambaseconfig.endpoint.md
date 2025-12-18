@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.endpoint property
 
+Target endpoint (URL or path) used by the underlying transport.
+
 **Signature:**
 
 ```typescript

@@ -4,11 +4,17 @@
 
 ## Transport interface
 
+Contract implemented by low-level transport drivers.
+
 **Signature:**
 
 ```typescript
 export interface Transport<TRaw = unknown> 
 ```
+
+## Remarks
+
+Methods are documented here so classes like [NdjsonTransport](./rtsk.ndjsontransport.md)<!-- -->, [SseTransport](./rtsk.ssetransport.md)<!-- -->, and [WebsocketTransport](./rtsk.websockettransport.md) inherit the API documentation directly from the interface.
 
 ## Methods
 
@@ -30,6 +36,8 @@ Description
 
 </td><td>
 
+Initiates the transport connection and begins streaming data.
+
 
 </td></tr>
 <tr><td>
@@ -38,6 +46,8 @@ Description
 
 
 </td><td>
+
+Terminates the transport connection and releases underlying resources.
 
 
 </td></tr>
@@ -48,7 +58,7 @@ Description
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Sends a message over the transport when supported (e.g., WebSocket).
 
 
 </td></tr>

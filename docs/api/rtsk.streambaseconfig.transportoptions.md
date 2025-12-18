@@ -4,6 +4,8 @@
 
 ## StreamBaseConfig.transportOptions property
 
+Optional network settings applied by the transport implementation.
+
 **Signature:**
 
 ```typescript

@@ -4,6 +4,8 @@
 
 ## Transport.send() method
 
+Sends a message over the transport when supported (e.g., WebSocket).
+
 **Signature:**
 
 ```typescript
@@ -39,6 +41,8 @@ unknown
 
 
 </td><td>
+
+Data to be serialized and transmitted.
 
 
 </td></tr>
