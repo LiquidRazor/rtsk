@@ -12,6 +12,19 @@ function buildUrl(endpoint, query) {
     });
     return url.toString();
 }
+/**
+ * Low-level NDJSON transport implementation.
+ *
+ * @remarks
+ * This is an advanced API.
+ * Most consumers should prefer {@link createStream}, which provides
+ * a higher-level, protocol-agnostic interface with lifecycle management.
+ *
+ * This transport is exposed for advanced use cases such as custom
+ * wiring, testing, or direct transport control.
+ *
+ * @public
+ */
 export class NdjsonTransport {
     config;
     abortController = null;

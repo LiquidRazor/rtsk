@@ -1,6 +1,6 @@
 import type { StreamMode, RequestMapper, ResponseHydrator } from "../types";
 /**
- * Config generic valabil pentru orice stream (ndjson, sse, websocket)
+ * Generic config applicable for any stream (ndjson, sse, websocket)
  */
 export interface StreamBaseConfig<TRequest, TRaw, TResponse> {
     mode: StreamMode;

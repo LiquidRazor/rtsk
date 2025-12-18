@@ -12,6 +12,19 @@ function buildUrl(endpoint, query) {
     });
     return url.toString();
 }
+/**
+ * Low-level SSE transport implementation.
+ *
+ * @remarks
+ * This is an advanced API.
+ * Most consumers should prefer {@link createStream}, which provides
+ * a higher-level, protocol-agnostic interface with lifecycle management.
+ *
+ * This transport is exposed for advanced use cases such as custom
+ * wiring, testing, or direct transport control.
+ *
+ * @public
+ */
 export class SseTransport {
     config;
     source = null;
@@ -44,14 +57,14 @@ export class SseTransport {
             return;
         };
         source.onerror = (event) => {
-            // EventSource nu oferă multe detalii...
+            // EventSource does not provide many details...
             handlers.onError(new RTSKError({
                 kind: "transport",
                 message: "SSE connection error",
                 cause: event,
             }));
         };
-        // Nu avem onopen aici, statusurile le va gestiona controller-ul mai sus
+        // There is no onopen here; statuses are managed by the controller above
     }
     disconnect() {
         if (!this.active) {
