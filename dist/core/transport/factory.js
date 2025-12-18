@@ -12,7 +12,7 @@ import { RTSKError } from "../types";
  * @typeParam TRaw - Raw payload type emitted by the transport.
  * @param definition - Stream definition that determines which transport to build.
  *
- * @public
+ * @internal
  */
 export function createTransportForDefinition(definition) {
     const { endpoint, transportOptions } = definition;
