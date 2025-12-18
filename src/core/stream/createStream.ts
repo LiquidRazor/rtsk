@@ -3,6 +3,58 @@ import {RTSKError} from "../types";
 import type {StreamDefinition} from "../definitions";
 import {createTransportForDefinition} from "../transport/factory";
 
+/**
+ * Creates a stream controller for managing client-side streaming connections.
+ *
+ * @remarks
+ * This factory function creates a {@link StreamController} that manages the lifecycle
+ * of a streaming connection and distributes events to subscribers.
+ *
+ * Status transitions typically include:
+ * - `idle` → `connecting` → `streaming`
+ * - `streaming` → `completed` (natural end)
+ * - `streaming` → `error` (failure)
+ * - `*` → `stopped` (manual stop)
+ *
+ * The controller supports multiple subscribers and notifies them of:
+ * - status changes (`onStatusChange`)
+ * - hydrated messages (`onNext`)
+ * - errors (`onError`)
+ * - completion (`onComplete`)
+ *
+ * @typeParam TRequest - Request payload used to initiate the stream (if applicable)
+ * @typeParam TRaw - Raw payload type received from the transport layer
+ * @typeParam TResponse - Hydrated payload type delivered to subscribers
+ *
+ * @param definition - Stream configuration defining transport mode, endpoint,
+ * request mapping, and response hydration
+ *
+ * @returns A {@link StreamController} instance with lifecycle and subscription helpers
+ *
+ * @example
+ * ```ts
+ * const controller = createStream({
+ *   mode: "ndjson",
+ *   endpoint: "https://api.example.com/stream",
+ *   requestMapper: (req) => req,
+ *   responseHydrator: (raw) => raw,
+ * });
+ *
+ * const sub = controller.subscribe({
+ *   onStatusChange: (s) => console.log("Status:", s),
+ *   onNext: (v) => console.log("Next:", v),
+ *   onError: (e) => console.error("Error:", e),
+ *   onComplete: () => console.log("Complete"),
+ * });
+ *
+ * controller.start({ query: "example" });
+ * // later...
+ * controller.stop();
+ * sub.unsubscribe();
+ * ```
+ *
+ * @public
+ */
 export function createStream<TRequest, TRaw, TResponse>(
     definition: StreamDefinition<TRequest, TRaw, TResponse>
 ): StreamController<TRequest, TResponse> {
@@ -13,10 +65,9 @@ export function createStream<TRequest, TRaw, TResponse>(
     let transport: Transport<TRaw> | null = null;
 
     function notifyStatus(newStatus: RTSKStatus): void {
-        if (status === newStatus) {
-            return;
-        }
+        if (status === newStatus) return;
         status = newStatus;
+
         for (const sub of subscribers) {
             sub.onStatusChange?.(status);
         }
@@ -28,7 +79,35 @@ export function createStream<TRequest, TRaw, TResponse>(
         }
     }
 
+    function disconnectTransportSafely(reason: "error" | "complete" | "stop"): void {
+        if (!transport) return;
+
+        try {
+            transport.disconnect();
+        } catch (e) {
+            // On stop, we already report disconnect failures (see stop()).
+            // On error/complete, avoid overwriting the primary error/completion signal.
+            if (reason === "stop") {
+                const err = new RTSKError({
+                    kind: "internal",
+                    message: "Error while disconnecting transport",
+                    cause: e,
+                    statusBefore: status,
+                });
+
+                for (const sub of subscribers) {
+                    sub.onError?.(err);
+                }
+            }
+        } finally {
+            transport = null;
+        }
+    }
+
     function notifyError(error: RTSKError): void {
+        // Ensure underlying resources are closed before broadcasting.
+        disconnectTransportSafely("error");
+
         notifyStatus("error");
         active = false;
 
@@ -38,6 +117,9 @@ export function createStream<TRequest, TRaw, TResponse>(
     }
 
     function notifyComplete(): void {
+        // Ensure underlying resources are closed before broadcasting.
+        disconnectTransportSafely("complete");
+
         notifyStatus("completed");
         active = false;
 
@@ -48,7 +130,7 @@ export function createStream<TRequest, TRaw, TResponse>(
 
     function start(request?: TRequest): void {
         if (active) {
-            // nu facem restart implicit, utilizatorul știe să dea stop/start dacă vrea
+            // No implicit restart. Consumer controls stop/start.
             return;
         }
 
@@ -68,23 +150,26 @@ export function createStream<TRequest, TRaw, TResponse>(
                     onRaw(raw: TRaw): void {
                         try {
                             const hydrated = definition.responseHydrator(raw);
-                            // dacă hydration-ul reușește, suntem clar în streaming
+
+                            // First successfully hydrated payload implies real streaming.
                             if (status === "connecting") {
                                 notifyStatus("streaming");
                             }
+
                             notifyNext(hydrated);
                         } catch (e) {
-                            const error = new RTSKError({
-                                kind: "hydrate",
-                                message: "Failed to hydrate stream payload",
-                                cause: e,
-                                statusBefore: status,
-                            });
-                            notifyError(error);
+                            notifyError(
+                                new RTSKError({
+                                    kind: "hydrate",
+                                    message: "Failed to hydrate stream payload",
+                                    cause: e,
+                                    statusBefore: status,
+                                })
+                            );
                         }
                     },
-                    onError(error: RTSKError): void {
-                        notifyError(error);
+                    onError(err: RTSKError): void {
+                        notifyError(err);
                     },
                     onComplete(): void {
                         notifyComplete();
@@ -92,17 +177,17 @@ export function createStream<TRequest, TRaw, TResponse>(
                 },
                 {
                     payload,
-                    // momentan nu expunem AbortSignal extern; transport-urile își gestionează singure abort-ul
+                    // Not exposing external AbortSignal for now; transports manage abort internally.
                     signal: null,
                 }
             );
 
-            // dacă nu a apucat încă să vină nimic, dar connect-ul a mers, considerăm că suntem „streaming”
+            // If connect succeeded but no data arrived yet, treat as streaming-ready.
             if (status === "connecting") {
                 notifyStatus("streaming");
             }
         } catch (e) {
-            const error =
+            notifyError(
                 e instanceof RTSKError
                     ? e
                     : new RTSKError({
@@ -110,43 +195,27 @@ export function createStream<TRequest, TRaw, TResponse>(
                         message: "Failed to start stream",
                         cause: e,
                         statusBefore: status,
-                    });
-
-            notifyError(error);
+                    })
+            );
         }
     }
 
     function stop(): void {
+        // If inactive and not in a connecting/streaming phase, no-op.
         if (!active && status !== "connecting" && status !== "streaming") {
             return;
         }
 
         active = false;
 
-        if (transport) {
-            try {
-                transport.disconnect();
-            } catch (e) {
-                // dacă și la disconnect crapă ceva, îl tratăm ca internal error,
-                // dar nu mai facem altceva cu stream-ul
-                const error = new RTSKError({
-                    kind: "internal",
-                    message: "Error while disconnecting transport",
-                    cause: e,
-                    statusBefore: status,
-                });
-                for (const sub of subscribers) {
-                    sub.onError?.(error);
-                }
-            }
-        }
+        // On stop, we *do* report disconnect failures to subscribers (internal error),
+        // but we still transition to "stopped" afterward.
+        disconnectTransportSafely("stop");
 
         notifyStatus("stopped");
     }
 
-    function subscribe(
-        handlers: StreamEventHandlers<TResponse>
-    ): StreamSubscription {
+    function subscribe(handlers: StreamEventHandlers<TResponse>): StreamSubscription {
         subscribers.add(handlers);
 
         return {
