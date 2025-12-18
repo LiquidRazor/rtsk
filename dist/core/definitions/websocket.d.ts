@@ -9,7 +9,7 @@ export interface WebsocketExtraConfig {
     protocols?: string[];
     /** Enables automatic reconnection when the socket closes unexpectedly. */
     autoReconnect?: boolean;
-    /** Delay between reconnection attempts when {@link autoReconnect} is true. */
+    /** Delay between reconnection attempts when {@link WebsocketExtraConfig.autoReconnect} is true. */
     reconnectDelayMs?: number;
 }
 /**

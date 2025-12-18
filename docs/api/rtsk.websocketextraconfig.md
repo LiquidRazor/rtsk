@@ -88,7 +88,7 @@ number
 
 </td><td>
 
-_(Optional)_ Delay between reconnection attempts when  is true.
+_(Optional)_ Delay between reconnection attempts when [WebsocketExtraConfig.autoReconnect](./rtsk.websocketextraconfig.autoreconnect.md) is true.
 
 
 </td></tr>

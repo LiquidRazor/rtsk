@@ -466,7 +466,7 @@ export declare interface WebsocketExtraConfig {
     protocols?: string[];
     /** Enables automatic reconnection when the socket closes unexpectedly. */
     autoReconnect?: boolean;
-    /** Delay between reconnection attempts when {@link autoReconnect} is true. */
+    /** Delay between reconnection attempts when {@link WebsocketExtraConfig.autoReconnect} is true. */
     reconnectDelayMs?: number;
 }
 
@@ -526,7 +526,7 @@ export declare type WebsocketTransportConfig = {
     protocols?: string[];
     /** Enables automatic reconnection after unexpected closure. */
     autoReconnect?: boolean;
-    /** Delay between reconnection attempts when {@link autoReconnect} is true. */
+    /** Delay between reconnection attempts when {@link WebsocketTransportConfig.autoReconnect} is true. */
     reconnectDelayMs?: number;
 };
 

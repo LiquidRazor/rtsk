@@ -4,7 +4,7 @@
 
 ## WebsocketExtraConfig.reconnectDelayMs property
 
-Delay between reconnection attempts when  is true.
+Delay between reconnection attempts when [WebsocketExtraConfig.autoReconnect](./rtsk.websocketextraconfig.autoreconnect.md) is true.
 
 **Signature:**
 

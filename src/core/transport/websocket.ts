@@ -18,7 +18,7 @@ export type WebsocketTransportConfig = {
     protocols?: string[];
     /** Enables automatic reconnection after unexpected closure. */
     autoReconnect?: boolean;
-    /** Delay between reconnection attempts when {@link autoReconnect} is true. */
+    /** Delay between reconnection attempts when {@link WebsocketTransportConfig.autoReconnect} is true. */
     reconnectDelayMs?: number;
 };
 
