@@ -1,1 +1,0 @@
-{"version":3,"file":"ndjson.d.ts","sourceRoot":"","sources":["../../../src/core/definitions/ndjson.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,QAAQ,CAAC;AAE/C;;;;;;;;;;;;GAYG;AACH,MAAM,WAAW,sBAAsB,CAAC,QAAQ,EAAE,IAAI,EAAE,SAAS,CAC7D,SAAQ,gBAAgB,CAAC,QAAQ,EAAE,IAAI,EAAE,SAAS,CAAC;IACnD,6CAA6C;IAC7C,IAAI,EAAE,QAAQ,CAAC;CAClB"}

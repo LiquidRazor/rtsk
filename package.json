@@ -19,12 +19,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "api:extract": "api-extractor run --local",
     "api:docs": "api-documenter markdown -i temp -o docs/api",
     "docs": "npm run build && npm run api:extract && npm run api:docs"
-  }
-,
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/LiquidRazor/rtsk.git"
@@ -32,6 +31,7 @@
   "devDependencies": {
     "@microsoft/api-documenter": "^7.28.2",
     "@microsoft/api-extractor": "^7.55.2",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
 }
