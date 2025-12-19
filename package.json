@@ -1,6 +1,6 @@
 {
   "name": "@liquidrazor/rtsk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client-side streaming helpers for NDJSON, SSE, and WebSockets with a unified TypeScript API.",
   "type": "module",
   "main": "dist/index.js",
